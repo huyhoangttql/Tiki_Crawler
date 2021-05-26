@@ -1,8 +1,9 @@
 import json
-import datetime
+from datetime import datetime
 
 f = open('data.json')
 data = json.load(f)
+new_data=[]
 for i in range(len(data)):
     item = data[i]
     item_id = item['id']
@@ -24,20 +25,27 @@ for i in range(len(data)):
         item_all_time_quantity_sold = item['all_time_quantity_sold']
     except:
         continue
-    item_fetched_timestamp = datetime.datetime.now()
 
-    print(f"item_id: {item_id}" )
-    print(f"item_name: {item_name}")
-    print(f"item_url: http:://tiki.vn/{item_url}")
-    print(f"item_image_url: {item_image}")
-    print(f"item_brand_name: {item_brand_name}")
-    print(f"item_price: {item_price}")
-    print(f"item_discount_rate: {item_discount_rate}")
-    print(f"item_rating_average: {item_rating_average}")
-    print(f"item_review_count: {item_review_count}")
-    print(f"item_quantity: {item_quantity}")
-    print(f"item_seller_product_id: {item_seller_product_id}")
-    print(f"item_tikinow: {item_tikinow}")
-    print(f"item_all_time_quantity_sold: {item_all_time_quantity_sold}")
-    print(f"item_fetched_timestamp: {item_fetched_timestamp}")
-    print("----------------------------------------")
+
+    new_data.append(
+        {
+            "item_id": item['id'],
+            "item_name": item['name'],
+            "item_url": item['url_path'],
+            "item_image_url": item['thumbnail_url'],
+            "item_brand_name": item['brand_name'],
+            "item_price": item['price'],
+            "item_tikinow": item_tikinow,
+            "item_discount_rate": item['discount_rate'],
+            "item_rating_average": item['rating_average'],
+            "item_review_count": item['review_count'],
+            "item_quantity": item['stock_item']['qty'],
+            "item_seller_product_id": item['seller_product_id'],
+            "item_all_time_quantity_sold": item_all_time_quantity_sold,
+            "item_fetched_timestamp": datetime.timestamp(datetime.now())
+
+        }
+    )
+print(new_data)
+f1 = open('data1.json','w+')
+json.dump(new_data,f1,indent=4)

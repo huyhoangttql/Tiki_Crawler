@@ -7,3 +7,5 @@
 .venv
 venv/
 ENV/
+data.json
+data1.json
