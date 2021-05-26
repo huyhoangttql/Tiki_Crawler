@@ -1,4 +1,5 @@
 import json
+import datetime
 
 f = open('data.json')
 data = json.load(f)
@@ -9,6 +10,7 @@ for i in range(len(data)):
     item_url = item['url_path']
     item_brand_name = item['brand_name']
     item_price = item['price']
+    item_image = item['thumbnail_url']
     try:
         item_tikinow = (item['badges_new'][0]['code']=='tikinow')
     except:
@@ -22,10 +24,12 @@ for i in range(len(data)):
         item_all_time_quantity_sold = item['all_time_quantity_sold']
     except:
         continue
+    item_fetched_timestamp = datetime.datetime.now()
 
     print(f"item_id: {item_id}" )
     print(f"item_name: {item_name}")
     print(f"item_url: http:://tiki.vn/{item_url}")
+    print(f"item_image_url: {item_image}")
     print(f"item_brand_name: {item_brand_name}")
     print(f"item_price: {item_price}")
     print(f"item_discount_rate: {item_discount_rate}")
@@ -35,4 +39,5 @@ for i in range(len(data)):
     print(f"item_seller_product_id: {item_seller_product_id}")
     print(f"item_tikinow: {item_tikinow}")
     print(f"item_all_time_quantity_sold: {item_all_time_quantity_sold}")
+    print(f"item_fetched_timestamp: {item_fetched_timestamp}")
     print("----------------------------------------")
